@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>camp adit</h2>
+  <form action="/campground/<%=aditCamp._id%>?_method=PUT" method="post">
+    <section>
+      <label for="tittle">camp tittle</label>
+      <input type="text" name="campground[tittle]" id="tittle" placeholder="enter tittle" value="<%=aditCamp.tittle%>">
+    </section>
+    <section>
+      <label for="location">camp location</label>
+      <input type="text" name="campground[location]" id="location" placeholder="enter location"
+        value="<%=aditCamp.location%>">
+    </section>
+    <button type="submit">submit</button>
+  </form>
+  <a href="/campground">All campground</a>
+</body>
+
+</html>
