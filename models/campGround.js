@@ -3,7 +3,8 @@ const schema = mongoose.Schema
 
 const yelpCamp = new schema({
   tittle : String,
-  price: String,
+  price: Number,
+  img: String,
   location: String,
   description: String
 })

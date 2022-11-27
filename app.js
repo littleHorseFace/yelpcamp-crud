@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const ejsMate = require('ejs-mate')
 const methodOverride = require('method-override')
 const campGround = require('./models/campGround')
 const mongoose = require('mongoose')
@@ -15,11 +16,16 @@ db.once('open', () => {
   console.log('su')
 })
 
+app.engine('ejs', ejsMate)
+
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(express.static(path.join(__dirname, 'public')))
+
 app.get('/', (req, res) => {
   res.send('hello yelpcamp')
 })
@@ -36,6 +42,7 @@ app.get('/campground/new', (req, res) => {
 app.get('/campground/:id', async (req, res) => {
   const { id } = req.params
   const showCamp = await campGround.findById(id)
+  console.log(showCamp)
   res.render('./campground/show', { showCamp })
 })
 
@@ -56,9 +63,9 @@ app.get('/campground/:id/adit', async (req, res) => {
 app.put('/campground/:id', async (req, res) => {
   const { id } = req.params
   const { campground: aditCamp } = req.body
-  console.log(aditCamp)
+  // console.log(aditCamp)
   await campGround.findByIdAndUpdate(id, aditCamp)
-  res.redirect('/campground')
+  res.redirect(`/campground/${id}`)
 })
 
 app.delete('/campground/:id', async (req, res) => {

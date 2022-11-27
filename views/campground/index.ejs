@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('./layout/boilerplate') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
   <h2>ALL CAMPGROUNDS</h2>
-  <h3><a href="/campground/new">add new campground</a></h3>
   <%for(let camp of campgrounds){%>
-    <li>
-      <a href="/campground/<%=camp._id%>">
-        <%=camp.tittle%>
-      </a>
-    </li>
-    <%}%>
-</body>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <img src="<%=camp.img%>" alt="<%=camp.tittle%>" class="all-camp-img">
+      </div>
+      <div class="col-md-8">
+        <h3>
+          <%=camp.tittle%>
+        </h3>
+        <h3>Location : <%=camp.location%>
+        </h3>
+        <p>
+          <%=camp.description%>
+        </p>
+        <li>
+          <a href="/campground/<%=camp._id%>" class="btn btn-primary">
+            Show campground
+          </a>
+        </li>
+      </div>
+    </div>
 
-</html>
+    <%}%>

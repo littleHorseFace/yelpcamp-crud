@@ -18,12 +18,16 @@ db.once('open', () => {
 tittleFun = array => array[Math.floor(Math.random() * array.length)]
 
 const seedAsync = async () => {
-  campGround.deleteMany({})
+  await campGround.deleteMany({})
   for (let i = 0; i < 50; i++) {
     const oneThousandsRandom = Math.floor(Math.random() * 1000)
+    const price = Math.floor(Math.random()*20)+10
     const city = new campGround({
       location: `${cities[oneThousandsRandom].city} - ${cities[oneThousandsRandom].state} `,
-      tittle: `${tittleFun(seedsHelper.descriptors)} - ${tittleFun(seedsHelper.places)}`
+      tittle: `${tittleFun(seedsHelper.descriptors)} - ${tittleFun(seedsHelper.places)}`,
+      img: `https://source.unsplash.com/collection/483251`,
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore eligendi corporis cumque eum, repudiandae quas dicta architecto reiciendis, ab illum officiis, voluptates ut voluptatibus? Impedit magni non eligendi illo voluptates?',
+      price 
     })
     await city.save()
   }
