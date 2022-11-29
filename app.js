@@ -5,6 +5,8 @@ const ejsMate = require('ejs-mate')
 const methodOverride = require('method-override')
 const campGround = require('./models/campGround')
 const mongoose = require('mongoose')
+const asyncFun = require('./utils/catchAsync')
+
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
   useNewUrlParser: true, useUnifiedTopology: true
 })
@@ -42,36 +44,40 @@ app.get('/campground/new', (req, res) => {
 app.get('/campground/:id', async (req, res) => {
   const { id } = req.params
   const showCamp = await campGround.findById(id)
-  console.log(showCamp)
   res.render('./campground/show', { showCamp })
 })
 
 app.post('/campground', async (req, res) => {
   const addNewCamp = req.body.campground
   const newCamp = await new campGround(addNewCamp)
-  console.log(newCamp)
   newCamp.save()
   res.redirect('/campground')
 })
 
-app.get('/campground/:id/adit', async (req, res) => {
+app.get('/campground/:id/adit', asyncFun(async (req, res, next) => {
   const { id } = req.params
   const aditCamp = await campGround.findById(id)
   res.render('./campground/adit', { aditCamp })
-})
+}
+))
 
-app.put('/campground/:id', async (req, res) => {
-  const { id } = req.params
-  const { campground: aditCamp } = req.body
-  // console.log(aditCamp)
-  await campGround.findByIdAndUpdate(id, aditCamp)
-  res.redirect(`/campground/${id}`)
-})
+app.put('/campground/:id', asyncFun(async (req, res, next) => {
+    const { id } = req.params
+    const { campground: aditCamp } = req.body
+    await campGround.findByIdAndUpdate(id, aditCamp)
+    res.redirect(`/campground/${id}`)
+  }
+))
 
 app.delete('/campground/:id', async (req, res) => {
   const { id } = req.params
   await campGround.findByIdAndDelete(id)
   res.redirect('/campground')
+})
+
+app.use((error, req, res, next) => {
+  const { status = 500, message = "oh boy something wrong" } = error
+  res.status(status).send(message)
 })
 
 app.listen(3000, () => {

@@ -5,37 +5,38 @@
       Show campground
     </h1>
     <div class="col-6 offset-3">
-      <form action="/campground" method="post">
+      <form action="/campground" method="post" novalidate class="needs-validation">
         <section class="mb-3">
           <label for="tittle">camp tittle</label>
           <input class="form-control form-control-lg" type="text" name="campground[tittle]" id="tittle"
-            placeholder="enter tittle">
+            placeholder="enter tittle" required>
         </section>
         <section class="mb-3">
           <label for="img">img url</label>
           <input class="form-control form-control-lg" type="text" name="campground[img]" id="img"
-            placeholder="enter img url">
+            placeholder="enter img url" required>
         </section>
         <section class="mb-3">
           <label for="location">camp location</label>
           <input class="form-control form-control-lg" type="text" name="campground[location]" id="location"
-            placeholder="enter location">
+            placeholder="enter location" required>
         </section>
         <section class="mb-3">
           <label for="price">price tag</label>
           <div class="input-group mb-3">
             <span class="input-group-text" id="price-lable">$</span>
             <input type="text" class="form-control" placeholder="enter price" aria-label="price"
-              aria-describedby="price-lable" id="price" name="campground[price]">
+              aria-describedby="price-lable" id="price" name="campground[price]" required>
           </div>
         </section>
         <section class="mb-3">
           <label for="floatingTextarea">Comments</label>
           <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-            name="campground[description]">
+            name="campground[description]" >
           </textarea>
         </section>
         <button type="submit" class="btn btn-primary">submit</button>
       </form>
     </div>
   </section>
+
