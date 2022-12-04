@@ -8,7 +8,7 @@
       <form action="/campground" method="post" novalidate class="needs-validation">
         <section class="mb-3">
           <label for="tittle">camp tittle</label>
-          <input class="form-control form-control-lg" type="text" name="campground[tittle]" id="tittle"
+          <input class="form-control form-control-lg" type="text" name="campground[title]" id="tittle"
             placeholder="enter tittle" required>
         </section>
         <section class="mb-3">
@@ -32,11 +32,10 @@
         <section class="mb-3">
           <label for="floatingTextarea">Comments</label>
           <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-            name="campground[description]" >
+            name="campground[description]">
           </textarea>
         </section>
         <button type="submit" class="btn btn-primary">submit</button>
       </form>
     </div>
   </section>
-
